@@ -284,7 +284,7 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 		local.sql = ((len(trim(arguments.query.from))) ? arguments.query.from : arguments.query.join) & ' ' & arguments.query.where & ' ' & arguments.query.groupBy;
 		local.queryParam = {
 			datasource = application.dsn.default,
-			sql = 'select ' & arguments.query.select & ' ' & local.sql & ' ;'
+			sql = 'select count(' & arguments.query.select & ') as rowCount ' & local.sql & ' ;'
 		};
 		
 		if (isStruct(arguments.params)) {
@@ -293,7 +293,7 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 		
 		local.result = application.query.run(local.queryParam).getResult();
 		
-		return local.result.recordCount;
+		return local.result.rowCount[1];
 	}
 
 	private array function readChildren(param) {
