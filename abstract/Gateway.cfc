@@ -438,7 +438,8 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 							
 							for (local.pindex = 1; local.pindex <= local.processorArrayLen; local.pindex++) {
 								local.processorName = getMetaData(local.processorArray[local.pindex]).name;
-								local.value = evaluate('this.getModel().#local.processorName#(local.value)'); 
+								// local.value = evaluate('this.getModel().#local.processorName#(local.value)'); 
+								local.value = invoke(this.getModel(), local.processorName, local.value);
  							}
 						}
 						

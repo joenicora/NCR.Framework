@@ -420,7 +420,8 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 									local.setter(local.contextArray);
 								}
 								
-								evaluate('local.innerObject.set' & variables.mapping.primaryKey & '(local.struct[variables.mapping.primaryKey])');
+								// evaluate('local.innerObject.set' & variables.mapping.primaryKey & '(local.struct[variables.mapping.primaryKey])');
+								invoke(local.innerObject, 'set#variables.mapping.primaryKey#', local.struct[variables.mapping.primaryKey]);
 
 								local.innerObject._superClass = this;
 								local.innerObject.save();
@@ -683,7 +684,8 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 
 			}
 			
-			evaluate('local.context.set' & local.object & '(local.objectArray)');
+			// evaluate('local.context.set' & local.object & '(local.objectArray)');
+			invoke(local.context, 'set#local.object#', local.objectArray);
 		}
 		
 		return local.objectArray;
@@ -750,7 +752,8 @@ component extends = 'com.ncr.abstract.ExceptionObject' {
 			local.struct = ((structKeyExists(arguments, 'struct')) ? arguments.struct : {});
 			
 			for (local.index = 1; local.index <= arrayLen(local.properties); local.index++) {
-				local.getterValue = evaluate('local.scope.get' & local.properties[local.index].name & '()');
+				// local.getterValue = evaluate('local.scope.get' & local.properties[local.index].name & '()');
+				local.getterValue = invoke(local.scope, 'get#local.properties[local.index].name#');
 				
 				if (!isNull(local.getterValue)) {
 					if (!isSimpleValue(local.getterValue)) {

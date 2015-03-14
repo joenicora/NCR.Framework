@@ -113,7 +113,8 @@ component {
 				arguments.information.options = local.array[local.index].options;
 			}		
 			
-			evaluate('new #local.array[local.index].cfc#().#local.array[local.index].method#(arguments.information)');
+			// evaluate('new #local.array[local.index].cfc#().#local.array[local.index].method#(arguments.information)');
+			invoke(local.array[local.index].cfc, local.array[local.index].method, arguments.information);
 		}		
 				
 	}
