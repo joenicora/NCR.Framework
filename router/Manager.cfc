@@ -11,6 +11,7 @@ component {
 	
 	public string function buildResult(resource, method) {
 		local.route = ((len(trim(arguments.resource))) ? variables.catelog.route[arguments.resource] : variables.catelog.route[variables.catelog.defaults.route]);
+		request.data.title = '';
 		
 		if (!len(trim(arguments.resource))) {
 			request.route = [variables.catelog.defaults.route];
@@ -106,6 +107,10 @@ component {
 				
 				return true;
 			}
+		}
+		
+		if (structKeyExists(local.route, 'title')) {
+			request.data.title = local.route.title;
 		}
 		
 		local.pageContextResponse = getPageContext().getResponse();
