@@ -74,10 +74,7 @@ component {
 	}
 	
 	public string function getHostAddress() {
-		local.iNetAddress = createObject('java', 'java.net.InetAddress');
-		local.address = local.iNetAddress.getLocalHost();
-		
-		return ((find('.local', local.address.getLocalHost())) ? 'localhost' : server_name);
+		return server_name;
 	}
 	
 }
