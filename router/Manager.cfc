@@ -135,6 +135,24 @@ component {
 				}
 				
 				break;
+			case 'jsonp' : 
+				local.pageContextResponse.setContentType('application/javascript');
+				local.responseHeader.setHeader( { name = "expires", value = "#now()#" } );
+				local.responseHeader.setHeader( { name = "pragma", value = "no-cache" } );
+				local.responseHeader.setHeader( { name = "cache-control", value = "no-cache, no-store, must-revalidate" } );
+				
+				if (isBoolean(application.stack.get('application.onRequestStart.Auth'))) {
+					request.data.content = request.params.callback & '(' & serializeJson(request.data.stack) & ')';	
+				}
+				else {
+					writeoutput(request.params.callback & '(' & serializeJson({
+						'success' = false,
+						'error' = application.stack.get('application.onRequestStart.Auth')
+					}) & ')');
+					abort;
+				}
+				
+				break;
 				
 			case 'xml' : 
 				local.pageContextResponse.setContentType('application/xml');
