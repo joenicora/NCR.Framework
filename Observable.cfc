@@ -38,7 +38,7 @@ component {
 	}
 
 	public void function observe(subject, handler) {
-		local.key = toKey(arguments.subject);
+		local.key = this.toKey(arguments.subject);
 		
 		if (!this.exists(arguments.subject, arguments.handler)) {
 			if (application.cache.has(local.key)) {
@@ -55,7 +55,7 @@ component {
 	}	
 	
 	public void function unobserve(subject, handler) {
-		local.key = toKey(arguments.subject);
+		local.key = this.toKey(arguments.subject);
 	
 		if (application.cache.has(local.key)) {
 			local.array = application.cache.get(local.key);
@@ -76,7 +76,7 @@ component {
 	}	
 	
 	public boolean function exists(subject, handler) {
-		local.key = toKey(arguments.subject);
+		local.key = this.toKey(arguments.subject);
 	
 		if (application.cache.has(local.key)) {
 			local.array = application.cache.get(local.key);
@@ -97,7 +97,7 @@ component {
 	}
 	
 	public void function notify(subject, information) {
-		local.key = toKey(arguments.subject);
+		local.key = this.toKey(arguments.subject);
 	
 		if (application.cache.has(local.key)) {
 			local.array = application.cache.get(local.key);
