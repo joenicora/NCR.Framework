@@ -87,11 +87,14 @@ component accessors = 'true' extends = 'com.ncr.abstract.Dao' {
 			return true;
 		}
 		catch (any e) {	
+			
+			writedump(arguments);
+			abort;
+			
 			this.save({
 				level = 'error',
 				label = 'com.ncr.log.dao.Log.save',
-				message = 'Error writing log',
-				detail = serializeJson(local)
+				message = 'Error writing log'
 			});
 		}
 
